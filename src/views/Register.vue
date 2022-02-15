@@ -1,14 +1,19 @@
 <template>
   <div class="page login">
-    <main>
+    <form id="sheet">
       <label class="line"
         ><span class="left">用户名</span
-        ><input type="text" class="right username" name="username"
+        ><input
+          v-model="username"
+          type="text"
+          class="right username"
+          name="username"
       /></label>
       <label class="line"
         ><span class="left">密码</span
         ><input
           type="password"
+          v-model="password1"
           class="right password"
           name="password"
           placeholder="6~15位数字、字符串"
@@ -19,31 +24,89 @@
         ><span class="left">密码</span
         ><input
           type="password"
+          v-model="password2"
           class="right password"
           name="password"
           placeholder="再次输入密码"
           minlength="6"
           maxlength="15"
       /></label>
-      <my-button class="submit" loading @click="login">注册</my-button>
-    </main>
+      <my-button
+        class="submit"
+        :loading="loading"
+        @click.stop.prevent="register"
+        >注册</my-button
+      >
+
+      <my-button
+        class="submit"
+        :loading="loading"
+        @click.stop.prevent="property"
+        >读取属性</my-button
+      >
+    </form>
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 import { PageNames } from '../constant'
+import { sleep } from '../utils/index'
+import * as HTTP from '../services/user'
 
 @Options({
   name: PageNames.Register,
   components: {},
 })
 export default class Register extends Vue {
+  loading = false
+
+  /* 初始参数 */
+  username = ''
+  password1 = ''
+  password2 = ''
+
+  mounted() {
+    Object.assign(window, {
+      vm: this,
+    })
+  }
+
   /**
    * 注册
    */
-  public login() {
-    console.log('* login')
+  private async register() {
+    const { username, password1, password2 } = this
+    if (password1 !== password2) {
+      return console.error('请检查密码是否一致')
+    }
+
+    this.loading = true
+    const { code, msg, data } = await HTTP.register({
+      username,
+      password: password1,
+    })
+    console.log('* 注册', data)
+    if (code === 0) {
+      console.log('* ', msg)
+      await sleep(2000)
+      this.$router.replace(PageNames.Login)
+    } else {
+      console.error(msg)
+    }
+    this.loading = false
+  }
+
+  /**
+   * 注册
+   */
+  private async property() {
+    this.loading = true
+    const { data } = await HTTP.property({
+      key: 'id',
+    })
+    console.log('* 注册', data)
+    this.loading = false
   }
 }
 </script>
@@ -54,7 +117,7 @@ export default class Register extends Vue {
 .page.login {
   @include flex-row(center, center);
 
-  main {
+  form {
     @include flex-col(space-between, stretch);
     .line {
       margin: 15px 0;

@@ -7,6 +7,7 @@
           type="text"
           class="right username"
           name="username"
+          v-model="username"
           placeholder="用户名"
       /></label>
       <label class="line"
@@ -15,6 +16,7 @@
           type="password"
           class="right password"
           name="password"
+          v-model="password"
           placeholder="密码"
           minlength="6"
           maxlength="15"
@@ -27,17 +29,33 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 import { PageNames } from '../constant'
+import * as HTTP from '../services/user'
 
 @Options({
   name: PageNames.Login,
   components: {},
 })
 export default class Login extends Vue {
+  loading = false
+
+  /* 初始参数 */
+  username = ''
+  password = ''
   /**
    * 登录
    */
-  public login() {
-    console.log('* login')
+  public async login() {
+    const { username, password } = this
+    const res = await HTTP.login({
+      username,
+      password,
+    })
+    const { code, data, msg } = res
+    if (code === 0) {
+      console.log(data, msg)
+    } else {
+      console.error(msg)
+    }
   }
 }
 </script>

@@ -1,14 +1,7 @@
 <template>
   <button class="my-button">
-    <template v-if="loading">
-      <slot
-        v-if="$slots.loading"
-        name="loading"
-        class="my-button-loading"
-      ></slot>
-      <MyLoading v-else class="my-button-loading"></MyLoading>
-    </template>
-
+    <slot v-if="$slots.loading" name="loading" class="my-button-loading"></slot>
+    <MyLoading v-else class="my-button-loading"></MyLoading>
     <div class="my-button-content">
       <slot></slot>
     </div>
@@ -19,7 +12,7 @@
 import { Options, Vue } from 'vue-class-component'
 
 @Options({
-  name: 'MyButton',
+  name: 'MyButtonX',
   props: {
     loading: {
       type: Boolean,
@@ -30,9 +23,6 @@ import { Options, Vue } from 'vue-class-component'
 })
 export default class MyButton extends Vue {
   // private renderLoading() {}
-  // mounted() {
-  //   console.log('* vv', this.$props, this.$attrs)
-  // }
 }
 </script>
 

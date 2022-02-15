@@ -63,16 +63,16 @@ button {
   }
 }
 // chrome 浏览器中的蓝色边框
-button,
-input[type='button'] {
-  user-select: none; // 选中文字
+// button,
+// input[type='button'] {
+//   user-select: none; // 选中文字
 
-  &:focus,
-  &:active {
-    outline: none !important;
-    background-color: transparent !important;
-  }
-}
+//   &:focus,
+//   &:active {
+//     outline: none !important;
+//     background-color: transparent !important;
+//   }
+// }
 
 html,
 body,

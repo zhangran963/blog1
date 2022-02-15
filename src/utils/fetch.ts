@@ -1,11 +1,30 @@
+interface IOptions extends RequestInit {
+  body?: any
+}
+
 export interface IRequest {
-  (url: string, config?: RequestInit | undefined): Promise<any>
+  (url: string, config?: IOptions): Promise<{
+    code: number
+    msg: string
+    data: any
+  }>
   get?: IRequest
 }
 
 export const request: IRequest = (url, config) => {
   url = `/api${url}`
-  return fetch(url, config)
+  const { method = '', mode = 'cors', body = {}, ...others } = config || {}
+  return fetch(url, {
+    method: method.toUpperCase(),
+    mode,
+    body: JSON.stringify(body),
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    ...others,
+  })
     .then((res) => {
       if (!res.ok) {
         throw Error('接口请求异常')
