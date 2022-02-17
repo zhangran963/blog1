@@ -27,6 +27,7 @@
 </template>
 
 <script lang="ts">
+import { sleep } from '@/utils'
 import { Options, Vue } from 'vue-class-component'
 import { PageNames } from '../constant'
 import * as HTTP from '../services/user'
@@ -52,7 +53,10 @@ export default class Login extends Vue {
     })
     const { code, data, msg } = res
     if (code === 0) {
-      console.log(data, msg)
+      localStorage.setItem('token', data.token)
+      console.log(msg)
+      await sleep(2000)
+      this.$router.replace('/')
     } else {
       console.error(msg)
     }

@@ -34,3 +34,5 @@ export type Awaited<T> = T extends PromiseLike<infer U> ? U : T
 export * from './fetch'
 
 export const sleep = (time = 0) => new Promise((res) => setTimeout(res, time))
+
+export { merge } from 'lodash'

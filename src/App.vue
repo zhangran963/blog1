@@ -108,7 +108,7 @@ body {
   width: 100%;
   min-height: 100vh;
   font-size: $font-size-middle;
-  @include inline-flex-row();
+  @include inline-flex-col();
 }
 #nav {
   padding: 30px;
