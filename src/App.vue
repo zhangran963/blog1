@@ -60,7 +60,6 @@ export default class App extends Vue {
 </script>
 
 <style lang="scss">
-@import '@/styles/reset.scss';
 @import '@/styles/index.scss';
 
 html,

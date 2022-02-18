@@ -1,69 +1,60 @@
 import { request } from '@/utils'
 
 export interface IUserInfo {
+  avatar: string
   username: string
+  birthday: string
+  email: string
+  phone_number: string
 }
-interface IUserInfoFunc {
-  (): Promise<{
-    code: number
-    msg: string
-    data: IUserInfo
-  }>
-}
-export const getUserInfo: IUserInfoFunc = (params = {}) => {
-  return request('/user/info', {})
+export const getUserInfo = (params = {}) => {
+  return request('/user/info', params).then((res) => {
+    localStorage.setItem('userInfo', JSON.stringify(res))
+    return res
+  }) as Promise<IUserInfo>
 }
 
 /**
  * 注册
  */
-interface IRegisterFunc {
-  (params: unknown): Promise<{
-    code: number
-    msg: string
-    data: {
-      name: string
-      filename: string
-      url: string
-      _source: unknown
-    }
-  }>
+interface IRegisterRes {
+  avatar: string
+  username: string
+  birthday: string
+  email: string
+  phone_number: string
 }
-
-export const register: IRegisterFunc = (params = {}) => {
+export const register = (params = {}) => {
   return request('/user/register', {
     method: 'POST',
     body: params,
-  })
+  }) as Promise<IRegisterRes>
 }
 
 /**
  * 登录
  */
-interface ILoginFunc {
-  (params: unknown): Promise<{
-    code: number
-    msg: string
-    data: {
-      userInfo: {
-        username: string
-        email: string
-        phone: string
-      }
-      token: string
-    }
-  }>
+export interface ILoginRes {
+  userInfo: {
+    username: string
+    email: string
+    phone: string
+  }
+  token: string
 }
-export const login: ILoginFunc = (params = {}) => {
+export const login = (params = {}) => {
   return request('/user/login', {
     method: 'POST',
     body: params,
-  })
+  }) as Promise<ILoginRes>
 }
 
-export const property: IRegisterFunc = (params = {}) => {
+/**
+ * 读取属性
+ */
+export const property = (params = {}) => {
   return request('/user/property', {
     method: 'POST',
     body: params,
-  })
+  }) as Promise<IRegisterRes>
 }

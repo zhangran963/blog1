@@ -1,3 +1,9 @@
+export * from './fetch'
+export * from './token'
+export * from './mount-component'
+export * from './input'
+export * from './tool'
+
 /**
  * 注: 不能放在constants文件; 因为map和store存在依赖关系
  */
@@ -31,8 +37,6 @@ export const platform = {
 /* 工具类型: await处理Promise<值>的类型 */
 export type Awaited<T> = T extends PromiseLike<infer U> ? U : T
 
-export * from './fetch'
-
-export const sleep = (time = 0) => new Promise((res) => setTimeout(res, time))
-
 export { merge } from 'lodash'
+
+export const emptyFn = (res?: unknown) => res

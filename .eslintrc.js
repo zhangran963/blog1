@@ -28,6 +28,8 @@ module.exports = {
     ],
     /* data函数, 不需要定义格式 */
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    /* 允许有 "// @ts-ignore" */
+    "@typescript-eslint/ban-ts-ignore": "off",
   },
   overrides: [
     {

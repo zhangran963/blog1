@@ -14,3 +14,8 @@ declare module '*.vue' {
 declare module '*.png'
 declare module '*.jpg'
 declare module '*.jpeg'
+
+// declare var Request: {
+//   prototype: Request;
+//   new(input: RequestInfo, init?: RequestInit): Request;
+// };

@@ -1,0 +1,88 @@
+body {
+  --my-black: #000;
+  --my-white: #fff;
+  --my-gray-1: #f7f8fa;
+  --my-gray-2: #f2f3f5;
+  --my-gray-3: #ebedf0;
+  --my-gray-4: #dcdee0;
+  --my-gray-5: #c8c9cc;
+  --my-gray-6: #969799;
+  --my-gray-7: #646566;
+  --my-gray-8: #323233;
+  --my-red: #ee0a24;
+  --my-blue: #1989fa;
+  --my-orange: #ff976a;
+  --my-orange-dark: #ed6a0c;
+  --my-orange-light: #fffbe8;
+  --my-green: #07c160;
+
+  // Gradient Colors
+  --my-gradient-red: linear-gradient(to right, #ff6034, #ee0a24);
+  --my-gradient-orange: linear-gradient(to right, #ffd01e, #ff8917);
+
+  // Component Colors
+  --my-primary-color: var(--my-blue);
+  --my-success-color: var(--my-green);
+  --my-danger-color: var(--my-red);
+  --my-warning-color: var(--my-orange);
+  --my-text-color: var(--my-gray-8);
+  --my-text-color-2: var(--my-gray-6);
+  --my-text-color-3: var(--my-gray-5);
+  --my-link-color: #576b95;
+  --my-active-color: var(--my-gray-2);
+  --my-active-opacity: 0.6;
+  --my-disabled-opacity: 0.5;
+  --my-background: var(--my-gray-1);
+  --my-background-2: var(--my-white);
+  --my-background-3: var(--my-white);
+  // Padding
+  --my-padding-base: 4px;
+  --my-padding-xs: 8px;
+  --my-padding-sm: 12px;
+  --my-padding-md: 16px;
+  --my-padding-lg: 24px;
+  --my-padding-xl: 32px;
+
+  // Font
+  --my-font-bold: 500;
+  --my-font-size-xs: 10px;
+  --my-font-size-sm: 12px;
+  --my-font-size-md: 14px;
+  --my-font-size-lg: 16px;
+  --my-line-height-xs: 14px;
+  --my-line-height-sm: 18px;
+  --my-line-height-md: 20px;
+  --my-line-height-lg: 22px;
+  /* stylelint-disable */
+  --my-base-font: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+    Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB',
+    'Microsoft Yahei', sans-serif;
+  --my-price-font: avenir-heavy, 'PingFang SC', helvetica neue, arial,
+    sans-serif;
+  /* stylelint-enable */
+
+  // Animation
+  --my-duration-base: 0.3s;
+  --my-duration-fast: 0.2s;
+  --my-ease-out: ease-out;
+  --my-ease-in: ease-in;
+
+  // Border
+  --my-border-color: var(--my-gray-3);
+  --my-border-width: 1px;
+  --my-radius-sm: 2px;
+  --my-radius-md: 4px;
+  --my-radius-lg: 8px;
+  --my-radius-max: 999px;
+}
+
+.my-theme-dark {
+  --my-text-color: #f5f5f5;
+  --my-text-color-2: #707070;
+  --my-text-color-3: #4d4d4d;
+  --my-border-color: #3a3a3c;
+  --my-active-color: #3a3a3c;
+  --my-background: #000;
+  --my-background-2: #1c1c1e;
+  --my-background-3: #37363b;
+}

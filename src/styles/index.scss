@@ -1,3 +1,5 @@
+@import './my-variable.scss';
+
 @import './scss/1px.scss';
 @import './scss/line.scss';
 @import './scss/flex.scss';
@@ -10,3 +12,10 @@
 $border-radius-small: 2px;
 $border-radius-middle: 4px;
 $border-radius-large: 8px;
+
+.my-container {
+  position: fixed;
+  z-index: 10;
+  left: 10px;
+  top: 10px;
+}

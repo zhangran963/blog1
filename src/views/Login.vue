@@ -2,35 +2,33 @@
   <div class="page login">
     <main>
       <label class="line"
-        ><span class="left">用户名</span
-        ><input
-          type="text"
+        ><span class="left">用户名</span>
+        <my-input
           class="right username"
-          name="username"
-          v-model="username"
-          placeholder="用户名"
-      /></label>
+          v-model="username.value"
+          v-bind="username"
+        ></my-input>
+      </label>
       <label class="line"
-        ><span class="left">密码</span
-        ><input
-          type="password"
-          class="right password"
-          name="password"
-          v-model="password"
-          placeholder="密码"
-          minlength="6"
-          maxlength="15"
-      /></label>
-      <my-button class="submit" @click="login">登录</my-button>
+        ><span class="left">密码</span>
+        <my-input
+          class="right passport"
+          v-model="password.value"
+          v-bind="password"
+        ></my-input>
+      </label>
+
+      <my-button class="submit" type="primary" @click="login">登录</my-button>
+      <my-button class="submit" @click="register">注册</my-button>
     </main>
   </div>
 </template>
 
 <script lang="ts">
-import { sleep } from '@/utils'
+import { token, useInputState } from '@/utils'
 import { Options, Vue } from 'vue-class-component'
-import { PageNames } from '../constant'
-import * as HTTP from '../services/user'
+import { PageNames } from '@/constant'
+import * as HTTP from '@/services/user'
 
 @Options({
   name: PageNames.Login,
@@ -40,26 +38,67 @@ export default class Login extends Vue {
   loading = false
 
   /* 初始参数 */
-  username = ''
-  password = ''
+  username = useInputState({
+    type: 'text',
+    value: '',
+    name: 'username',
+    placeholder: '用户名',
+    minlength: 4,
+    maxlength: 15,
+  }).state
+  password = useInputState({
+    type: 'password',
+    value: '',
+    placeholder: '密码',
+    name: 'password',
+    minlength: 6,
+    maxlength: 15,
+  }).state
+
+  mounted() {
+    const { username } = this.$route.params
+    this.username.value = username as string
+  }
   /**
    * 登录
    */
   public async login() {
-    const { username, password } = this
-    const res = await HTTP.login({
-      username,
-      password,
-    })
-    const { code, data, msg } = res
-    if (code === 0) {
-      localStorage.setItem('token', data.token)
-      console.log(msg)
-      await sleep(2000)
-      this.$router.replace('/')
-    } else {
-      console.error(msg)
+    {
+      /* 用户名 */
+      const { value: username } = this.username
+      if (!username || username.length === 0) {
+        return this.$toast('请填写用户名')
+      }
     }
+    {
+      /* 密码 */
+      const { value: password } = this.password
+      if (!password || password.length === 0) {
+        return this.$toast('请填写密码')
+      }
+    }
+    this.loading = true
+    HTTP.login({
+      username: this.username.value,
+      password: this.password.value,
+    })
+      .then(async (data) => {
+        this.loading = false
+        token.set(data.token)
+        await this.$toast('登录成功')
+        this.$router.replace('/')
+      })
+      .catch((err) => {
+        this.loading = false
+        this.$toast(err)
+      })
+  }
+
+  /**
+   * 注册
+   */
+  async register() {
+    this.$router.replace(PageNames.Register)
   }
 }
 </script>
@@ -83,8 +122,6 @@ export default class Login extends Vue {
       }
       .right {
         width: 240px;
-        height: 48px;
-        padding: 0 0.8em;
         background-color: transparent;
       }
 

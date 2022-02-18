@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '../views/Home/main.vue'
 import { PageNames } from '../constant'
 
 const routes: Array<RouteRecordRaw> = [
@@ -16,7 +16,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/register',
     name: PageNames.Register,
-    component: () => import('../views/Register.vue'),
+    component: () => import('../views/Register/main.vue'),
+  },
+  {
+    path: '/article',
+    name: PageNames.Article,
+    component: () => import('../views/Article/main.vue'),
   },
 ]
 

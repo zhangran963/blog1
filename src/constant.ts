@@ -14,4 +14,5 @@ export const PageNames = {
   Home: 'Home',
   Login: 'Login',
   Register: 'Register',
+  Article: 'Article',
 }
