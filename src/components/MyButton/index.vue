@@ -1,6 +1,7 @@
 <template>
   <button
     :class="['my-button', `my-button--${type}`, `my-button--${disabled}`]"
+    :disabled="disabled"
     @click.stop="onClick"
   >
     <template v-if="loading">
@@ -24,6 +25,8 @@ import { Options, Vue } from 'vue-class-component'
 @Options({
   name: 'MyButton',
   inheritAttrs: true,
+  /* 注: 未声明时, 与原生事件同名时, 会触发2次 */
+  emits: ['click'],
   props: {
     type: {
       type: String,
@@ -42,7 +45,7 @@ import { Options, Vue } from 'vue-class-component'
 export default class MyButton extends Vue {
   disabled!: boolean
 
-  private onClick(event: MouseEvent) {
+  onClick(event: MouseEvent) {
     if (this.disabled) {
       /*  */
     } else {

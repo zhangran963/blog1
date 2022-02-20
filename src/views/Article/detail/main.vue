@@ -1,15 +1,17 @@
 <template>
-  <div class="page article">article页面</div>
+  <div class="page article-detail">
+    <h3>article页面 - main</h3>
+  </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import { PageNames } from '../../constant'
+import { PageNames } from '@/constant'
 import { sleep } from '@/utils/index'
 import { getList, IArticleItem } from '@/services/article'
 
 @Options({
-  name: PageNames.Article,
+  name: PageNames.Article.Detail,
   components: {},
 })
 export default class Article extends Vue {

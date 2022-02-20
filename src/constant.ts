@@ -14,5 +14,9 @@ export const PageNames = {
   Home: 'Home',
   Login: 'Login',
   Register: 'Register',
-  Article: 'Article',
+  // Article: 'Article',
+  Article: {
+    Create: 'ArticleCreate',
+    Detail: 'ArticleDetail',
+  },
 }

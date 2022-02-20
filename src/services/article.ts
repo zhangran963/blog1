@@ -12,3 +12,16 @@ export const getList = (params = {}) => {
     ...params,
   }) as Promise<IArticleItem[]>
 }
+
+/**
+ * 文章基本信息
+ */
+export interface IArticleInfo {
+  title: string
+}
+export const saveArticle = (params = {}) => {
+  return request('/article/create', {
+    method: 'POST',
+    body: params,
+  }) as Promise<IArticleInfo>
+}

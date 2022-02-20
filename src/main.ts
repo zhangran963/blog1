@@ -16,7 +16,7 @@ app.use(MyLoading)
 app.use(MyToast)
 
 /* 全局属性 */
-app.config.globalProperties.foo = 'bar'
+app.config.globalProperties.globalShowBg = true
 
 /* 处理错误 */
 app.config.errorHandler = (err, vm, info) => {

@@ -7,21 +7,35 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: PageNames.Home,
     component: Home,
+    meta: {
+      showBg: true,
+    },
   },
   {
     path: '/login',
     name: PageNames.Login,
     component: () => import('../views/Login.vue'),
+    meta: {
+      showBg: true,
+    },
   },
   {
     path: '/register',
     name: PageNames.Register,
     component: () => import('../views/Register/main.vue'),
+    meta: {
+      showBg: true,
+    },
   },
   {
-    path: '/article',
-    name: PageNames.Article,
-    component: () => import('../views/Article/main.vue'),
+    path: '/article/create',
+    name: PageNames.Article.Create,
+    component: () => import('@/views/article/create/main.vue'),
+  },
+  {
+    path: '/article/detail',
+    name: PageNames.Article.Detail,
+    component: () => import('@/views/article/detail/main.vue'),
   },
 ]
 

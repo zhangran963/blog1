@@ -1,13 +1,15 @@
 <template>
-  <div class="bg-container" v-if="showBg">
-    <transition-group name="fade" mode="out-in">
-      <img
-        v-for="(src, index) of bgImgs"
-        :key="index"
-        :src="src"
-        v-show="index === bgIndex"
-      />
-    </transition-group>
+  <div class="bg-container" v-if="meta.showBg">
+    <div class="content">
+      <transition-group name="fade" mode="out-in">
+        <img
+          v-for="(src, index) of bgImgs"
+          :key="index"
+          :src="src"
+          v-show="index === bgIndex"
+        />
+      </transition-group>
+    </div>
   </div>
   <router-view />
 </template>
@@ -20,8 +22,11 @@ import bgImg3 from './assets/bg-3.jpg'
 import { sleep } from './utils/index'
 
 @Options({
-  components: {},
-  computed: {},
+  computed: {
+    meta() {
+      return this.$route.meta
+    },
+  },
 })
 export default class App extends Vue {
   showBg = false
@@ -37,7 +42,7 @@ export default class App extends Vue {
    */
   private async startBgImg() {
     this.bgImgs.push(bgImg1)
-    await sleep(700)
+    await sleep(600)
     this.showBg = true
     setInterval(() => {
       this.bgIndex = this.calcNextIndex()
@@ -72,10 +77,7 @@ body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: whitesmoke;
-
-  background-color: #000;
 
   width: 100vw;
   max-width: 100vw;
@@ -87,23 +89,27 @@ body {
     z-index: 1;
     width: 100%;
     height: 100vh;
+    background-color: black;
 
-    opacity: 0.5;
-    > img {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .content {
+      opacity: 0.5;
+      > img {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
   }
 }
+
 .page {
   position: relative;
-  z-index: 2;
+  z-index: 5;
   width: 100%;
   min-height: 100vh;
   font-size: $font-size-middle;
